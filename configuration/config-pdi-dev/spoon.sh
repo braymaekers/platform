@@ -1,7 +1,9 @@
 #! /bin/sh
-#PENTAHO_ENV = current folder name
-export PENTAHO_ENV=${PWD##*/}
-#! New variable needed to get passed on to init.sh, maybe we can parse this out of the directory structure?
-export PROJECT_NAME=sales_dwh
-cd "$PWD"/../../../bin
+#PENTAHO_ENV = current folder name, eg. config-pdi-local
+#PROJECT_NAME = current project name, eg. sales_dwh
+
+export PENTAHO_ENV=$(basename $PWD)
+export PROJECT_NAME=$(basename $(dirname $(dirname $PWD)))
+
+cd "$PWD"/../../framework/configuration
 sh spoon.sh
